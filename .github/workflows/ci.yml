@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Login to registry
+        uses: azure/docker-login@v1
+        with:
+          login-server: docker.pkg.github.com
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}  
+      - name: Run SPA + API monolith
+        run: docker-compose -f docker/docker-compose.spa_api_monolith.yml up -d
+      - name: Check for services
+        run: docker-compose -f docker/docker-compose.spa_api_monolith.yml ps
+      - name: Stop docker
+        run: docker-compose -f docker/docker-compose.spa_api_monolith.yml down
