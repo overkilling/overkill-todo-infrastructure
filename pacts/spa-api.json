@@ -16,32 +16,15 @@
       "response": {
         "status": 200,
         "headers": {
-          "Content-Type": "application/json; charset=utf-8"
+          "Content-Type": "application/json"
         },
-        "body": "ok",
-        "matchingRules": {
-          "$.body": {
-            "match": "type"
-          }
-        }
-      }
-    },
-    {
-      "description": "healthcheck",
-      "providerState": "application is unhealthy",
-      "request": {
-        "method": "GET",
-        "path": "/health"
-      },
-      "response": {
-        "status": 200,
-        "headers": {
-          "Content-Type": "application/json; charset=utf-8"
+        "body": {
+          "status": "ok"
         },
-        "body": "fail",
         "matchingRules": {
-          "$.body": {
-            "match": "type"
+          "$.body.status": {
+            "match": "regex",
+            "regex": "ok|fail"
           }
         }
       }
