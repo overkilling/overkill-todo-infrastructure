@@ -11,6 +11,8 @@ services:
       - api
   api:
     image: docker.pkg.github.com/overkilling/overkill-todo-monolith-api/api:latest
+    environment:
+      DB_HOST: db
     ports:
       - "3000:3000"
     expose:
