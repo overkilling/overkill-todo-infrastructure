@@ -28,6 +28,36 @@
           }
         }
       }
+    },
+    {
+      "description": "get todos",
+      "providerState": "user has todos",
+      "request": {
+        "method": "GET",
+        "path": "/todos"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": [
+          {
+            "todo": "task"
+          }
+        ],
+        "matchingRules": {
+          "$.body": {
+            "min": 1
+          },
+          "$.body[*].*": {
+            "match": "type"
+          },
+          "$.body[*].todo": {
+            "match": "type"
+          }
+        }
+      }
     }
   ],
   "metadata": {
