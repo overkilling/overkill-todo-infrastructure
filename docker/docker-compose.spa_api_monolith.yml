@@ -2,7 +2,7 @@ version: '3'
 
 services:
   spa:
-    image: docker.pkg.github.com/overkilling/overkill-todo-spa-frontend/spa:latest
+    image: docker.pkg.github.com/overkilling/overkill-todo-spa-frontend/spa:${SPA_VERSION:?err}
     ports:
       - "80:80"
     expose:
@@ -10,7 +10,7 @@ services:
     depends_on:
       - api
   api:
-    image: docker.pkg.github.com/overkilling/overkill-todo-monolith-api/api:latest
+    image: docker.pkg.github.com/overkilling/overkill-todo-monolith-api/api:${API_VERSION:?err}
     environment:
       DB_HOST: db
     ports:

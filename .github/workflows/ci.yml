@@ -18,6 +18,10 @@ jobs:
           login-server: docker.pkg.github.com
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}  
+      - name: Set API_VERSION
+        run: echo ::set-env name=API_VERSION::$(jq -r '."overkilling/overkill-todo-monolith-api"' docker/versions.json)
+      - name: Set SPA_VERSION
+        run: echo ::set-env name=SPA_VERSION::$(jq -r '."overkilling/overkill-todo-spa-frontend"' docker/versions.json)
       - name: Run SPA + API monolith
         run: docker-compose -f docker/docker-compose.spa_api_monolith.yml up -d
       - name: Check for services
