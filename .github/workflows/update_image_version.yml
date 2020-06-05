@@ -1,0 +1,26 @@
+name: Update image version
+
+on:
+  repository_dispatch:
+    types: [new-image-version]
+
+jobs:
+  update_version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Update version
+        run: |
+          tmp=$(mktemp)
+          jq '."${{ github.event.client_payload.repository }}" = "${{ github.event.client_payload.image_version }}"' docker/versions.json > "$tmp"
+          mv "$tmp" docker/versions.json
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v2
+        with:
+          commit-message: Update "${{ github.event.client_payload.repository }}" image version to "${{ github.event.client_payload.image_version }}"
+          title: Update "${{ github.event.client_payload.repository }}" image version to "${{ github.event.client_payload.image_version }}"
+          labels: automation
+          branch: update-image-version
+          branch-suffix: short-commit-hash
+          reviewers: phss
