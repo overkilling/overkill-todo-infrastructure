@@ -31,3 +31,33 @@ The intent is to provide some practice to the developer and, perhaps, some educa
 
 This repository contains infrastructure related code, which ties the whole application together.
 It allows to start the application locally through `docker-compose`, but it doesn't deploy it yet to any real environment.
+
+## Getting started
+
+To get started, clone the codebase to your local environment:
+
+```
+git clone git@github.com:overkilling/overkill-todo-infrastructure.git
+```
+
+### Running the application
+
+Currently the only supported mechanism for running the application is through `docker-compose`.
+
+To run the full stack (frontend, backend and database) with a particular version:
+
+```
+env SPA_VERSION="<some version>" env API_VERSION="<some version>" docker-compose -f docker/docker-compose.spa_api_monolith.yml up
+```
+
+A list of the latest good versions, which passed all CI checks, are in `docker/versions.json`
+
+### Pact
+
+Currently the shared contract between frontend and backend is stored in `pacts/spa-api.json`.
+At some point this will be moved to a Pact broker.
+
+### Github Actions
+
+TODO
+
