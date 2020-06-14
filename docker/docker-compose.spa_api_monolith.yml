@@ -11,6 +11,13 @@ services:
       - api
     networks:
       - todo
+    logging:
+      driver: fluentd
+      options:
+        fluentd-address: localhost:24224
+        fluentd-async-connect: 'true'
+        tag: spa
+
   api:
     image: docker.pkg.github.com/overkilling/overkill-todo-monolith-api/api:${API_VERSION:?err}
     environment:
@@ -30,6 +37,7 @@ services:
         fluentd-address: localhost:24224
         fluentd-async-connect: 'true'
         tag: api
+
   db:
     image: postgres:latest
     ports:
