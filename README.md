@@ -47,7 +47,7 @@ Currently the only supported mechanism for running the application is through `d
 To run the full stack (frontend, backend and database) with a particular version:
 
 ```
-env SPA_VERSION="<some version>" env API_VERSION="<some version>" docker-compose -f docker/docker-compose.spa_api_monolith.yml up
+env SPA_VERSION="<some version>" env API_VERSION="<some version>" docker-compose -f docker/docker-compose.spa_api_monolith.yml up --build
 ```
 
 A list of the latest good versions, which passed all CI checks, are in `docker/versions.json`
