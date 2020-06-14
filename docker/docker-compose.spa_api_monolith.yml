@@ -29,6 +29,7 @@ services:
       options:
         fluentd-address: localhost:24224
         fluentd-async-connect: 'true'
+        tag: api
   db:
     image: postgres:latest
     ports:
@@ -50,8 +51,8 @@ services:
     ports:
       - "24224:24224"
       - "24224:24224/udp"
-    # volumes:
-    #   - ./fluentd:/fluentd
+    volumes:
+      - ./fluentd:/fluentd
 
   # fluentd:
   #   build: ./fluentd
