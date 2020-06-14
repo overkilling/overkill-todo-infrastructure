@@ -47,34 +47,36 @@ services:
     restart: on-failure
 
   fluentd:
-    image: fluent/fluentd:edge
+    build: ./fluentd
+    depends_on:
+      - elasticsearch
     ports:
       - "24224:24224"
       - "24224:24224/udp"
     volumes:
-      - ./fluentd:/fluentd
+      - ./fluentd/etc:/fluentd/etc
+    networks:
+      - todo
 
-  # fluentd:
-  #   build: ./fluentd
-  #   volumes:
-  #     - ./fluentd/conf:/fluentd/etc
-  #   ports:
-  #     - "24224:24224"
-  #     - "24224:24224/udp"
+  elasticsearch:
+    image: elasticsearch:7.7.1
+    environment:
+      - discovery.type=single-node
+    expose:
+      - 9200
+    ports:
+      - "9200:9200"
+    networks:
+      - todo
 
-  # elasticsearch:
-  #   image: elasticsearch
-  #   expose:
-  #     - 9200
-  #   ports:
-  #     - "9200:9200"
-
-  # kibana:
-  #   image: kibana
-  #   links:
-  #     - "elasticsearch"
-  #   ports:
-  #     - "5601:5601"
+  kibana:
+    image: kibana:7.7.1
+    depends_on:
+      - elasticsearch
+    ports:
+      - "5601:5601"
+    networks:
+      - todo
 
 volumes:
   pgdata:
