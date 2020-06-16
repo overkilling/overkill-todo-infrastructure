@@ -44,13 +44,11 @@ git clone git@github.com:overkilling/overkill-todo-infrastructure.git
 
 Currently the only supported mechanism for running the application is through `docker-compose`.
 
-To run the full stack (frontend, backend and database) with a particular version:
+To run the full stack (frontend, backend and database) with the latest versions (from `docker/versions.json`):
 
 ```
-env SPA_VERSION="<some version>" env API_VERSION="<some version>" docker-compose -f docker/docker-compose.spa_api_monolith.yml up --build
+bin/docker-compose-with-versions -f docker/docker-compose.spa_api_monolith.yml up --build
 ```
-
-A list of the latest good versions, which passed all CI checks, are in `docker/versions.json`
 
 ### Pact
 
