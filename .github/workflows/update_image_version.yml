@@ -13,10 +13,7 @@ jobs:
         with:
           token: ${{ secrets.BOT_TOKEN }}
       - name: Update version
-        run: |
-          tmp=$(mktemp)
-          jq '."${{ github.event.client_payload.repository }}" = "${{ github.event.client_payload.image_version }}"' docker/versions.json > "$tmp"
-          mv "$tmp" docker/versions.json
+        run: bin/update_version ${{ github.event.client_payload.repository }} ${{ github.event.client_payload.image_version }}
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v2
         with:

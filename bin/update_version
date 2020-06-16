@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+#
+# Updates docker/versions.json file
+
+set -e
+
+if ! [ -x "$(command -v jq)" ]; then
+  echo "Error: jq is not installed" >&2
+  exit 1
+fi
+
+if [ -n "$1" ]; then
+    repository=$1
+    shift
+else 
+    echo "Error: missing repository"
+    exit 1
+fi
+
+if [ -n "$1" ]; then
+    new_version=$1
+    shift
+else 
+    echo "Error: missing new version"
+    exit 1
+fi
+
+tmp=$(mktemp)
+jq ".\"$repository\" = \"$new_version\"" docker/versions.json > "$tmp"
+mv "$tmp" docker/versions.json
+
+echo "Image $repository updated to $new_version"
