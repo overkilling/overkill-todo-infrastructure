@@ -57,5 +57,11 @@ At some point this will be moved to a Pact broker.
 
 ### Github Actions
 
-TODO
+The Continuous Integration (CI) tooling used in this project is [Github Actions](https://github.com/features/actions), mainly because it's free and easy to use.
 
+Currently, there are two workflows: a CI and a image version update.
+
+The CI workflow, defined `.github/workflows/ci.yml`, spins up a Docker Compose environment and makes sure all components are up and running.
+
+The version update workflow, defined `.github/workflows/update_image_version.yml`, is triggered when either the frontend or backend projects publish a new image.
+It will automatically create a PR with the new image, so to ensure that the latest versions are immediately integrated.
