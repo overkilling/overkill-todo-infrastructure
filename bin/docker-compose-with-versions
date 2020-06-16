@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+#
+# Runs docker-compose with image versions from docker/versions.json
+
+set -e
+
+if ! [ -x "$(command -v jq)" ]; then
+  echo "Error: jq is not installed" >&2
+  exit 1
+fi
+
+export API_VERSION=$(jq -r '."overkilling/overkill-todo-monolith-api"' docker/versions.json)
+export SPA_VERSION=$(jq -r '."overkilling/overkill-todo-spa-frontend"' docker/versions.json)
+
+docker-compose $@
