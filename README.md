@@ -55,9 +55,20 @@ bin/docker-compose-with-versions -f docker/docker-compose.spa_api_monolith.yml u
 Currently the shared contract between frontend and backend is stored in `pacts/spa-api.json`.
 At some point this will be moved to a Pact broker.
 
-### Github Actions
 
-The Continuous Integration (CI) tooling used in this project is [Github Actions](https://github.com/features/actions), mainly because it's free and easy to use.
+### Observability
+
+Currently there are two observability types implemented in the project:
+
+* Logging: structured logs in [Elasticsearch](https://www.elastic.co/elasticsearch/), accessible in [Kibana](https://www.elastic.co/kibana) at http://localhost:5601
+* Metrics: stored in [Prometheus](https://prometheus.io/), accessible at http://localhost:9090
+
+There [is an argument](https://peter.bourgon.org/blog/2016/02/07/logging-v-instrumentation.html) that logging all requests is not a great idea, specially if the application has a high-volume. But, for completeness and learning, I will leave it in.
+
+
+### Continuous Integration (CI)
+
+The CI tooling used in this project is [Github Actions](https://github.com/features/actions), mainly because it's free and easy to use.
 
 Currently, there are two workflows: a CI and a image version update.
 
