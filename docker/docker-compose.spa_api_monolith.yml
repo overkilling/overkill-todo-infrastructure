@@ -96,6 +96,17 @@ services:
     networks:
       - todo
 
+  prometheus:
+    image: prom/prometheus
+    expose:
+      - 9090
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus:/etc/prometheus
+    networks:
+      - todo
+
 volumes:
   pgdata:
 
