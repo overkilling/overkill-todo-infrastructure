@@ -107,6 +107,20 @@ services:
     networks:
       - todo
 
+  db-metrics:
+    image: wrouesnel/postgres_exporter:v0.8.0
+    depends_on:
+      - db
+    restart: always
+    environment:
+      - DATA_SOURCE_URI=db:5432/todo?sslmode=disable
+      - DATA_SOURCE_USER=postgres
+      - DATA_SOURCE_PASS=postgres
+    ports:
+      - "9187:9187"
+    networks:
+      - todo
+
 volumes:
   pgdata:
 
