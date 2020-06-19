@@ -1,0 +1,7 @@
+---
+contracts:
+- name: api is healthy
+  path: "/health"
+  method: GET
+  http_code_is: 200
+  response_body_contains: ok

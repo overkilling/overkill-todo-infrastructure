@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+#
+# Run smoke tests in a runing docker network
+
+set -e
+
+if [ -n "$1" ]; then
+    network=$1
+    shift
+else 
+    echo "Error: missing network"
+    exit 1
+fi
+
+echo "=== API smoke tests ==="
+docker run \
+    --network $network \
+    -v $PWD/smoke:/test \
+    bluehoodie/smoke -v -f /test/api.yml -u http://api -p 3000

@@ -22,5 +22,7 @@ jobs:
         run: bin/docker-compose-with-versions -f docker/docker-compose.spa_api_monolith.yml up -d
       - name: Check for services
         run: bin/docker-compose-with-versions -f docker/docker-compose.spa_api_monolith.yml ps
+      - name: Smoke tests
+        run: bin/smoke-tests docker_todo
       - name: Stop docker
         run: bin/docker-compose-with-versions -f docker/docker-compose.spa_api_monolith.yml down
