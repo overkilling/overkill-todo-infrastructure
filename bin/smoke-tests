@@ -19,6 +19,10 @@ function smoke_test {
     echo "=== $host smoke tests ==="
     docker run \
         --network $network \
+        -e TARGETS=$host:$port \
+        waisbrot/wait
+    docker run \
+        --network $network \
         -v $PWD/smoke:/test \
         bluehoodie/smoke -v -f /test/$host.yml -u http://$host -p $port
     echo
