@@ -1,7 +1,19 @@
 ---
 contracts:
-- name: api is healthy
+- name: healthy
   path: "/health"
   method: GET
   http_code_is: 200
-  response_body_contains: ok
+  response_body_contains: '{"status":"ok"}'
+
+- name: get todos
+  path: "/todos"
+  method: GET
+  http_code_is: 200
+  response_body_contains: '{"todo":"Some todo"}'
+
+- name: expose metrics
+  path: "/metrics"
+  method: GET
+  http_code_is: 200
+  response_body_contains: TYPE todos_handler_requests_total counter

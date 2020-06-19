@@ -12,8 +12,16 @@ else
     exit 1
 fi
 
-echo "=== API smoke tests ==="
-docker run \
-    --network $network \
-    -v $PWD/smoke:/test \
-    bluehoodie/smoke -v -f /test/api.yml -u http://api -p 3000
+function smoke_test {
+    host=$1
+    port=$2
+
+    echo "=== $host smoke tests ==="
+    docker run \
+        --network $network \
+        -v $PWD/smoke:/test \
+        bluehoodie/smoke -v -f /test/$host.yml -u http://$host -p $port
+}
+
+smoke_test api 3000
+
