@@ -21,7 +21,9 @@ function smoke_test {
         --network $network \
         -v $PWD/smoke:/test \
         bluehoodie/smoke -v -f /test/$host.yml -u http://$host -p $port
+    echo
 }
 
 smoke_test api 3000
+smoke_test spa 80
 

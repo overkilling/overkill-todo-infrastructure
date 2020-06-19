@@ -1,0 +1,7 @@
+---
+contracts:
+- name: main page
+  path: "/"
+  method: GET
+  http_code_is: 200
+  response_body_contains: Todo
