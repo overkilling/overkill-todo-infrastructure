@@ -37,10 +37,10 @@ services:
       - fluentd
     networks:
       - todo
-    logging:
-      << : *fluentd-logging
-      options:
-        tag: api
+    # logging:
+    #   << : *fluentd-logging
+    #   options:
+    #     tag: api
 
   db:
     image: postgres:latest
