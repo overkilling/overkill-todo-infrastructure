@@ -35,12 +35,13 @@ services:
     depends_on:
       - db
       - fluentd
+    restart: always
     networks:
       - todo
-    # logging:
-    #   << : *fluentd-logging
-    #   options:
-    #     tag: api
+    logging:
+      << : *fluentd-logging
+      options:
+        tag: api
 
   db:
     image: postgres:latest
