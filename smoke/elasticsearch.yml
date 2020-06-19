@@ -1,0 +1,13 @@
+---
+contracts:
+- name: running
+  path: "/"
+  method: GET
+  http_code_is: 200
+  response_body_contains: You Know, for Search
+
+- name: simple query
+  path: "/_search"
+  method: GET
+  http_code_is: 200
+  response_body_contains: '"timed_out":false,'
