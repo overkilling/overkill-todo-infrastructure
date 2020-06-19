@@ -1,0 +1,9 @@
+---
+contracts:
+- name: targets configured
+  path: "/targets"
+  method: GET
+  http_code_is: 200
+  response_contains:
+  - http://api:3000/metrics
+  - http://db-metrics:9187/metrics

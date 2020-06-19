@@ -27,3 +27,4 @@ function smoke_test {
 smoke_test api 3000
 smoke_test spa 80
 smoke_test elasticsearch 9200 
+smoke_test prometheus 9090 
