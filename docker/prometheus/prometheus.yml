@@ -5,3 +5,4 @@ scrape_configs:
   - targets:
     - api:3000
     - db-metrics:9187
+    - nginx-metrics:9113

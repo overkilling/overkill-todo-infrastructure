@@ -7,3 +7,4 @@ contracts:
   response_contains:
   - http://api:3000/metrics
   - http://db-metrics:9187/metrics
+  - http://nginx-metrics:9113/metrics
