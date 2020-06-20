@@ -10,6 +10,9 @@ x-fluentd-logging:
 services:
   spa:
     image: docker.pkg.github.com/overkilling/overkill-todo-spa-frontend/spa:${SPA_VERSION:?err}
+    environment:
+      API_HOST: api
+      API_PORT: 3000
     ports:
       - "80:80"
     expose:
@@ -28,6 +31,7 @@ services:
     image: docker.pkg.github.com/overkilling/overkill-todo-monolith-api/api:${API_VERSION:?err}
     environment:
       DB_HOST: db
+      DB_PORT: 5432
     ports:
       - "3000:3000"
     expose:
