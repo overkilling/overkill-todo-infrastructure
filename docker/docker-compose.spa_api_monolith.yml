@@ -126,6 +126,17 @@ services:
     networks:
       - todo
 
+  nginx-metrics:
+    image: nginx/nginx-prometheus-exporter:0.8.0
+    depends_on:
+      - spa
+    restart: always
+    command: -nginx.scrape-uri http://spa:8080/stub_status
+    ports:
+      - "9113:9113"
+    networks:
+      - todo
+
 volumes:
   pgdata:
 
